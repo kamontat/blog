@@ -32,7 +32,7 @@ const PostPage = ({ post, previous, next }: Props) => {
     },
   ]
   return (
-    <Normal title={p.title} meta={meta}>
+    <Normal title={p.title} meta={meta} image={p.coverImage}>
       <Container>
         <Header />
         <article className="mb-32">

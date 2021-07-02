@@ -3,15 +3,15 @@ import Meta from "../misc/meta"
 type Props = {
   title?: string
   meta?: Record<string, string>[]
+  image?: string
   children: React.ReactNode
 }
 
-export const Normal = ({ title, meta, children }: Props) => {
+export const Normal = ({ title, meta, children, image }: Props) => {
   return (
     <>
-      <Meta meta={meta} />
+      <Meta title={title} meta={meta} image={image} />
       <div className="min-h-screen">
-        {title && <title>{title}</title>}
         <main>{children}</main>
       </div>
     </>
