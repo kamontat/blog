@@ -1,7 +1,7 @@
+import { Normal } from "../components/layout"
 import Header from "../components/index/header"
 import HeroPost from "../components/index/hero-post"
 import Posts from "../components/index/posts"
-import { Normal } from "../components/layout"
 import Container from "../components/misc/container"
 import Link from "../components/misc/link"
 

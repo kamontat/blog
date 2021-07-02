@@ -7,7 +7,7 @@ const loadPostSlugs = (): string[] => {
   return readdirSync(postsDirectory)
 }
 
-const getPostBySlug = <F extends string>(_slug: string, fields: readonly F[] = []): Record<F, string> => {
+const getPostBySlug = <F extends string>(_slug: string, fields: readonly F[] = []): Record<F, any> => {
   const slug = _slug.replace(/\.md$/, "")
   const filepath = join(postsDirectory, slug.concat(".md"))
   const fileContents = readFileSync(filepath, "utf8")
@@ -29,11 +29,11 @@ const getPostBySlug = <F extends string>(_slug: string, fields: readonly F[] = [
   return items
 }
 
-const loadPPosts = <K extends string>(fields: readonly K[]): Record<K, string>[] => {
+const loadPPosts = <K extends string>(fields: readonly K[]): Record<K, any>[] => {
   return loadPostSlugs().map((slug) => getPostBySlug(slug, fields))
 }
 
-const loadPosts = <K extends string>(fields: readonly K[]): Record<K, string>[] => {
+const loadPosts = <K extends string>(fields: readonly K[]): Record<K, any>[] => {
   return loadPostSlugs().map((slug) => getPostBySlug(slug, fields))
 }
 

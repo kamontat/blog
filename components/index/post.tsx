@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Post } from "../../lib/posts/models"
 import CoverImage from "../misc/cover"
+import Tags from "../misc/tag"
 import Time from "../misc/time"
 
 type Props = {
@@ -20,6 +21,7 @@ const PostPreview = ({ post }: Props) => {
       </h3>
       <div className="text-lg mb-4">{post.date && <Time date={post.date} />}</div>
       <p className="text-lg leading-relaxed mb-4">{post.excerpt}</p>
+      {post.tags && <Tags tags={post.tags} />}
     </div>
   )
 }

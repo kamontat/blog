@@ -2,6 +2,7 @@ import Link from "next/link"
 import { Post } from "../../lib/posts/models"
 import CoverImage from "../misc/cover"
 import Time from "../misc/time"
+import Tags from "../misc/tag"
 
 type Props = {
   post: Post
@@ -28,6 +29,7 @@ const HeroPost = ({ post }: Props) => {
         </div>
         <div>
           <p className="text-lg leading-relaxed mb-4">{post.excerpt}</p>
+          {post.tags && <Tags tags={post.tags} />}
         </div>
       </div>
     </section>

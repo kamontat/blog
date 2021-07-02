@@ -4,6 +4,10 @@ import Link from "next/link"
 
 import defaultImage from "../../public/assets/posts/default.jpeg"
 
+type ChildProps = {
+  children: React.ReactNode
+}
+
 type Props = {
   title?: string
   src?: string
@@ -16,30 +20,27 @@ const CoverImage = ({ title, src, slug, height, width }: Props) => {
   const isDefault = src === undefined || src === null || src === ""
 
   var image: JSX.Element | undefined = undefined
+  const classnames = cn("rounded-lg")
   if (isDefault) {
     image = (
       <Image
         src={defaultImage}
         alt={`Default Image for ${title ?? slug}`}
         layout="responsive"
-        height={height}
         width={width}
-        className={cn("shadow-small", {
-          "hover:shadow-medium transition-shadow duration-200": slug,
-        })}
+        height={height}
+        className={classnames}
       />
     )
-  } else {
+  } else if (src) {
     image = (
       <Image
-        src={src ?? ""}
+        src={src}
         alt={`Cover Image for ${title ?? slug}`}
         layout="responsive"
-        height={height}
         width={width}
-        className={cn("shadow-small", {
-          "hover:shadow-medium transition-shadow duration-200": slug,
-        })}
+        height={height}
+        className={classnames}
       />
     )
   }

@@ -8,13 +8,13 @@ export enum PostType {
 }
 
 export type RawPost = {
-  [K in typeof Post.fullFields[number] | "html"]: string
+  [K in typeof Post.fullFields[number] | "html"]: any
 }
 
 export class Post {
   static slugFields = ["slug"] as const
-  static minimialFields = ["slug", "title", "excerpt", "date", "coverImage"] as const
-  static fullFields = ["slug", "title", "excerpt", "date", "coverImage", "content"] as const
+  static minimialFields = ["slug", "title", "excerpt", "date", "coverImage", "tags"] as const
+  static fullFields = ["slug", "title", "excerpt", "date", "coverImage", "tags", "content"] as const
 
   readonly type: PostType
   readonly url: string
@@ -23,8 +23,9 @@ export class Post {
   readonly excerpt?: string
   readonly date?: Date
   readonly coverImage?: string
+  readonly tags?: string[]
   readonly content?: string
-  constructor(json: Record<string, string>) {
+  constructor(json: RawPost) {
     if (!json) {
       this.type = PostType.UNKNOWN
       this.slug = ""
@@ -38,6 +39,7 @@ export class Post {
       if (json["date"]) this.date = parseISO(json["date"])
       else this.date = undefined
       this.coverImage = json["coverImage"] ?? undefined
+      this.tags = json["tags"] ?? undefined
       this.content = json["html"] ?? json["content"] ?? undefined
 
       const size = Object.keys(json).length

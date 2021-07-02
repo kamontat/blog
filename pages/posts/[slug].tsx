@@ -4,7 +4,9 @@ import { useRouter } from "next/router"
 import { Normal, Header } from "../../components/layout"
 import PostHeader from "../../components/post/header"
 import PostBody from "../../components/post/body"
+import Paginator from "../../components/post/paginator"
 import Container from "../../components/misc/container"
+import Tags from "../../components/misc/tag"
 
 import { getPostBySlug, loadPPosts } from "../../lib/posts/apis"
 import { mdToHtml } from "../../lib/markdown"
@@ -16,7 +18,7 @@ type Props = {
   next?: RawPost
 }
 
-const PostPage = ({ post }: Props) => {
+const PostPage = ({ post, previous, next }: Props) => {
   const router = useRouter()
   if (!router.isFallback && (!post || post.slug === "")) {
     return <ErrorPage statusCode={404} />
@@ -36,6 +38,11 @@ const PostPage = ({ post }: Props) => {
         <article className="mb-32">
           <PostHeader title={p.title} coverImage={p.coverImage} date={p.date} />
           <PostBody content={p.content} />
+
+          <footer>
+            {p.tags && <Tags tags={p.tags} />}
+            <Paginator previous={previous} next={next} />
+          </footer>
         </article>
       </Container>
     </Normal>
@@ -80,18 +87,11 @@ export async function getStaticProps({ params }: Params) {
 
 export async function getStaticPaths() {
   const posts = loadPPosts(Post.slugFields)
-  const size = posts.length
-
   return {
-    paths: posts.map((post, i) => {
-      const previous = i - 1 < 0 ? undefined : posts[i - 1].slug
-      const next = i + 1 >= size ? undefined : posts[i + 1].slug
-
+    paths: posts.map((post) => {
       return {
         params: {
-          previous: previous,
           slug: post.slug,
-          next: next,
         },
       }
     }),

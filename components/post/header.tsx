@@ -1,4 +1,5 @@
 import CoverImage from "../misc/cover"
+import Tags from "../misc/tag"
 import Time from "../misc/time"
 import PostTitle from "./title"
 
@@ -12,7 +13,7 @@ const PostHeader = ({ title, coverImage, date }: Props) => {
   return (
     <>
       <PostTitle>{title}</PostTitle>
-      <div className="mb-8 md:mb-16 sm:mx-0">
+      <div className="mb-5 md:mb-12 sm:mx-0">
         <CoverImage src={coverImage} title={title} height={620} width={1240} />
       </div>
       <div className="mx-auto">
