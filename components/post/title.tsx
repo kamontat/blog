@@ -4,7 +4,7 @@ type Props = {
   children: React.ReactNode
 }
 
-const PostTitle = ({ children, tags }: Props) => {
+const PostTitle = ({ children }: Props) => {
   const classnames = cn(
     "text-5xl md:text-6xl lg:text-7xl",
     "font-bold",
