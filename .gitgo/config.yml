@@ -1,0 +1,54 @@
+version: 5
+settings:
+  hack: true
+  config:
+    disabled: false
+  log:
+    level: info
+  commit:
+    key:
+      enabled: true
+      required: true
+      prompt:
+        select:
+          page: 5
+          suggestion: false
+          values:
+            - key: feat
+              text: Introducing new features
+            - key: perf
+              text: Improving user experience / usability / reliablity
+            - key: fix
+              text: Fixing a bug
+            - key: chore
+              text: Other changes unrelated to user/client
+    scope:
+      enabled: true
+      required: false
+      prompt:
+        select:
+          page: 5
+          suggestion: false
+          values:
+            - key: core
+              text: Core modules of application
+            - key: model
+              text: Application models
+            - key: api
+              text: Application program interface
+            - key: deps
+              text: Application dependencies
+    title:
+      enabled: true
+      required: true
+      prompt:
+        input:
+          max: 75
+          multiline: false
+    message:
+      enabled: false
+      required: false
+      prompt:
+        input:
+          max: 200
+          multiline: true
