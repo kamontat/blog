@@ -25,14 +25,8 @@ const PostPage = ({ post, previous, next }: Props) => {
   }
 
   const p = new Post(post)
-  const meta = [
-    {
-      property: "og:image",
-      content: p.coverImage ?? "",
-    },
-  ]
   return (
-    <Normal title={p.title} meta={meta} image={p.coverImage}>
+    <Normal title={p.title} image={p.coverImage}>
       <Container>
         <Header />
         <article className="mb-32">
