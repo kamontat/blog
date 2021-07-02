@@ -1,6 +1,8 @@
 {
-  "name": "blog",
+  "name": "kcblog",
+  "display": "KCBlog",
   "version": "0.1.0",
+  "description": "kamontat blog :)",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,14 +11,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "classnames": "2.3.1",
+    "date-fns": "2.22.1",
+    "gray-matter": "4.0.3",
     "next": "11.0.1",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "remark": "13.0.0",
+    "remark-html": "13.0.1"
   },
   "devDependencies": {
+    "@types/node": "15.14.0",
     "@types/react": "17.0.13",
+    "@types/react-dom": "17.0.8",
+    "autoprefixer": "10.2.6",
     "eslint": "7.29.0",
     "eslint-config-next": "11.0.1",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-prettier": "3.4.0",
+    "postcss": "8.3.5",
+    "prettier": "2.3.2",
+    "tailwindcss": "2.2.4",
     "typescript": "4.3.5"
   }
 }

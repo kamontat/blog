@@ -1,3 +1,26 @@
 {
-  "extends": ["next", "next/core-web-vitals"]
+  "plugins": ["prettier"],
+  "extends": [
+    "next",
+    "prettier",
+    "next/core-web-vitals"
+  ],
+  "rules": {
+    "indent": [
+      "error",
+      2,
+      {
+        "SwitchCase": 1
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "es5",
+        "semi": false,
+        "singleQuote": false,
+        "printWidth": 120
+      }
+    ]
+  }
 }
