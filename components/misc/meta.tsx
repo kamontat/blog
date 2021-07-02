@@ -4,11 +4,12 @@ import pjson from "../../package.json"
 
 type Props = {
   title?: string
+  description?: string
   meta?: Record<string, string>[]
   image?: string
 }
 
-const Meta = ({ title, meta, image }: Props) => {
+const Meta = ({ title, description, meta, image }: Props) => {
   const rounter = useRouter()
   return (
     <Head>
@@ -17,15 +18,18 @@ const Meta = ({ title, meta, image }: Props) => {
       <link rel="manifest" href="/site.webmanifest" />
       <link rel="shortcut icon" href="/favicon.ico" />
 
+      <meta name="app-title" content={pjson.name} />
+      <meta name="app-description" content={pjson.description} />
+
       <meta name="title" content={title ?? pjson.name} />
-      <meta name="description" content={pjson.description} />
+      <meta name="description" content={description ?? pjson.description} />
       <meta name="version" content={pjson.version} />
       <meta name="preview" content={rounter.isPreview ? "true" : "false"} />
 
       <meta property="og:site_name" content={title ?? pjson.name} />
       <meta property="og:title" content={title ?? pjson.name} />
       <meta property="og:url" content={rounter.asPath} />
-      <meta property="og:description" content={pjson.description} />
+      <meta property="og:description" content={description ?? pjson.description} />
       <meta property="og:locale" content={rounter.locale ?? "en-US"} />
       {rounter.locales &&
         rounter.locales.map((l) => {

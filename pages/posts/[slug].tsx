@@ -26,7 +26,7 @@ const PostPage = ({ post, previous, next }: Props) => {
 
   const p = new Post(post)
   return (
-    <Normal title={p.title} image={p.coverImage}>
+    <Normal title={`${p.title} | KC`} description={p.excerpt} image={p.coverImage}>
       <Container>
         <Header />
         <article className="mb-32">

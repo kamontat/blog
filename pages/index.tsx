@@ -20,7 +20,7 @@ const Index = ({ first, nexts }: Props) => {
   const next = nexts.map((n) => new Post(n))
 
   return (
-    <Normal title={`${pjson.display} | Kamontat Chantrachirathumrong`}>
+    <Normal title={`${pjson.display} | KC`} image={post.coverImage}>
       <Container>
         <Header title={`${pjson.display}.`}>
           Personal blogs for collect and share purpose using <Link url="https://nextjs.org/" name="Next.js" />.
