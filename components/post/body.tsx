@@ -1,16 +1,11 @@
 type Props = {
-  content?: string
+  children?: React.ReactElement
 }
 
-const PostBody = ({ content }: Props) => {
+const PostBody = ({ children }: Props) => {
   return (
     <div className="mx-auto">
-      {content && (
-        <article
-          className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl prose-blue"
-          dangerouslySetInnerHTML={{ __html: content }}
-        />
-      )}
+      <article className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl prose-blue">{children}</article>
     </div>
   )
 }

@@ -1,4 +1,6 @@
 import { parseISO } from "date-fns"
+import { mdToHtml } from "../../lib/markdown"
+import type React from "react"
 
 export enum PostType {
   UNKNOWN = -1,
@@ -8,7 +10,7 @@ export enum PostType {
 }
 
 export type RawPost = {
-  [K in typeof Post.fullFields[number] | "html"]: any
+  [K in typeof Post.fullFields[number]]: any
 }
 
 export class Post {
@@ -26,6 +28,7 @@ export class Post {
   readonly coverImage?: string
   readonly tags?: string[]
   readonly content?: string
+
   constructor(json: RawPost) {
     if (!json) {
       this.type = PostType.UNKNOWN
@@ -43,7 +46,7 @@ export class Post {
       else this.date = undefined
       this.coverImage = json["coverImage"] ?? undefined
       this.tags = json["tags"] ?? undefined
-      this.content = json["html"] ?? json["content"] ?? undefined
+      this.content = json["content"] ?? undefined
 
       const size = Object.keys(json).length
       if (size === Post.slugFields.length) {
@@ -64,5 +67,9 @@ export class Post {
 
   isExist(): boolean {
     return this.type !== PostType.UNKNOWN
+  }
+
+  generateReact(): React.ReactElement | undefined {
+    return this.content ? mdToHtml(this.content) : undefined
   }
 }

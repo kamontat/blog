@@ -12,6 +12,7 @@ import Footer from "../../components/post/footer"
 import { getPostBySlug, loadPPosts } from "../../lib/posts/apis"
 import { mdToHtml } from "../../lib/markdown"
 import { Post, RawPost } from "../../lib/posts/models"
+import type React from "react"
 
 type Props = {
   post: RawPost
@@ -31,7 +32,7 @@ const PostPage = ({ post, previous, next }: Props) => {
       <Header />
       <article className="mb-8">
         <PostHeader title={p.title} coverImage={p.coverImage} date={p.date} />
-        <PostBody content={p.content} />
+        <PostBody>{p.generateReact()}</PostBody>
       </article>
       <Footer tags={p.tags} previous={previous} next={next} />
     </Normal>
@@ -47,12 +48,7 @@ interface Params extends ParsedUrlQuery {
 }
 
 const toPost = async (slug: string): Promise<RawPost> => {
-  const raw = getPostBySlug(slug, Post.fullFields)
-  const html = await mdToHtml(raw.content)
-  return {
-    ...raw,
-    html,
-  }
+  return getPostBySlug(slug, Post.fullFields)
 }
 
 export const getStaticProps: GetStaticProps<Props, Params> = async ({ params, locale, defaultLocale }) => {
