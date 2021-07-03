@@ -1,4 +1,4 @@
-import { RawPost } from "../../lib/posts/models"
+import type { RawPost } from "../../lib/posts/models"
 
 type Props = {
   previous?: RawPost

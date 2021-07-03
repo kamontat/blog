@@ -1,10 +1,9 @@
-import { GetStaticProps } from "next"
+import type { GetStaticProps } from "next"
 
 import { Normal } from "../components/layout"
 import Header from "../components/index/header"
 import HeroPost from "../components/index/hero-post"
 import Posts from "../components/index/posts"
-import Link from "../components/misc/link"
 
 import { loadPosts } from "../lib/posts/apis"
 import { RawPost, Post } from "../lib/posts/models"
