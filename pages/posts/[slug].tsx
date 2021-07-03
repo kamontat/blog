@@ -1,4 +1,6 @@
-import { GetStaticProps, GetStaticPaths, GetStaticPathsResult } from "next"
+import type { GetStaticProps, GetStaticPaths, GetStaticPathsResult } from "next"
+import type { ParsedUrlQuery } from "querystring"
+
 import ErrorPage from "next/error"
 import { useRouter } from "next/router"
 
@@ -11,7 +13,6 @@ import Tags from "../../components/misc/tag"
 import { getPostBySlug, loadPPosts } from "../../lib/posts/apis"
 import { mdToHtml } from "../../lib/markdown"
 import { Post, RawPost } from "../../lib/posts/models"
-import { ParsedUrlQuery } from "querystring"
 
 type Props = {
   post: RawPost

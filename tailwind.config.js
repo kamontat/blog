@@ -2,6 +2,7 @@ module.exports = {
   mode: "jit",
   darkMode: "media", // or "media" or "class"
   purge: ["./components/**/*.tsx", "./pages/**/*.tsx"],
+  plugins: [require("@tailwindcss/typography")],
   theme: {
     extend: {
       colors: {
@@ -21,6 +22,13 @@ module.exports = {
         "6xl": "2.75rem",
         "7xl": "4.5rem",
         "8xl": "6.25rem",
+      },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: "100%",
+          },
+        },
       },
     },
   },

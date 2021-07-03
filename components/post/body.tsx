@@ -1,5 +1,3 @@
-import style from "./body.module.css"
-
 type Props = {
   content?: string
 }
@@ -7,7 +5,12 @@ type Props = {
 const PostBody = ({ content }: Props) => {
   return (
     <div className="mx-auto">
-      {content && <div className={style.markdown} dangerouslySetInnerHTML={{ __html: content }} />}
+      {content && (
+        <article
+          className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl prose-blue"
+          dangerouslySetInnerHTML={{ __html: content }}
+        />
+      )}
     </div>
   )
 }

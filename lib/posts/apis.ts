@@ -6,7 +6,7 @@ const postsDirectory = join(process.cwd(), "_posts")
 const loadPostSlugs = (lang: string): string[] => {
   const posts = join(postsDirectory, lang)
   return readdirSync(posts)
-    .filter((v) => v.endsWith("md"))
+    .filter((v) => v.endsWith("md") && !v.startsWith(".draft"))
     .map((v) => `${lang}/${v}`)
 }
 
