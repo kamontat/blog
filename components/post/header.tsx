@@ -14,7 +14,7 @@ const PostHeader = ({ title, coverImage, date }: Props) => {
     <>
       <PostTitle>{title}</PostTitle>
       <div className="mb-5 md:mb-12 sm:mx-0">
-        <CoverImage src={coverImage} title={title} height={620} width={1240} />
+        <CoverImage src={coverImage} title={title} />
       </div>
       <div className="mb-6 text-lg">{date && <Time date={date} location="right" />}</div>
     </>

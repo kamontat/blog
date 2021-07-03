@@ -1,7 +1,7 @@
 import type React from "react"
 import type { Node } from "unist"
 
-import CoverImage from "../misc/cover"
+import CImage from "../misc/image"
 
 type Props = {
   node: Node
@@ -10,7 +10,7 @@ type Props = {
 }
 
 const Image = ({ src, alt }: Props) => {
-  return <CoverImage src={src} slug={alt} height={620} width={1240} />
+  return <CImage src={src} alt={alt} />
 }
 
 export default Image

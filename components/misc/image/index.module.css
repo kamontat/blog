@@ -1,0 +1,17 @@
+.container {
+  @apply w-full;
+}
+
+.image {
+  @apply rounded-lg object-contain !w-full !relative;
+
+  height: unset !important;
+}
+
+.container>div {
+  position: unset !important;
+}
+
+.container>div>div {
+  @apply  !pt-0;
+}

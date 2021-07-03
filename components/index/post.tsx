@@ -13,7 +13,7 @@ const PostPreview = ({ post }: Props) => {
   return (
     <div>
       <div className="mb-5">
-        <CoverImage slug={post.slug} title={post.title} src={post.coverImage} height={278} width={556} />
+        <CoverImage slug={post.slug} title={post.title} src={post.coverImage} />
       </div>
       <h3 className="text-3xl mb-3 leading-snug">
         <Link as={`/posts/${post.slug}`} href="/posts/[slug]" name={post.title} />

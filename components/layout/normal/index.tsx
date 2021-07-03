@@ -1,9 +1,9 @@
-import TagManager from "../misc/gtm"
-import Container from "../misc/container"
-import Meta from "../misc/meta"
-import { Footer } from "./footer"
+import TagManager from "../../misc/gtm"
+import Container from "../../misc/container"
+import Meta from "../../misc/meta"
+import { Footer } from "../footer"
 
-import style from "./normal.module.css"
+import style from "./index.module.css"
 
 type Props = {
   title?: string
