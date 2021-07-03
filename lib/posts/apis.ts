@@ -5,7 +5,9 @@ import matter from "gray-matter"
 const postsDirectory = join(process.cwd(), "_posts")
 const loadPostSlugs = (lang: string): string[] => {
   const posts = join(postsDirectory, lang)
-  return readdirSync(posts).map((v) => `${lang}/${v}`)
+  return readdirSync(posts)
+    .filter((v) => v.endsWith("md"))
+    .map((v) => `${lang}/${v}`)
 }
 
 const getLangFromSlug = (s: string): [string | undefined, string] => {

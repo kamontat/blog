@@ -6,7 +6,6 @@ import { Normal, Header } from "../../components/layout"
 import PostHeader from "../../components/post/header"
 import PostBody from "../../components/post/body"
 import Paginator from "../../components/post/paginator"
-import Container from "../../components/misc/container"
 import Tags from "../../components/misc/tag"
 
 import { getPostBySlug, loadPPosts } from "../../lib/posts/apis"
@@ -29,18 +28,16 @@ const PostPage = ({ post, previous, next }: Props) => {
   const p = new Post(post)
   return (
     <Normal title={`${p.title} | KC`} description={p.excerpt} image={p.coverImage}>
-      <Container>
-        <Header />
-        <article className="mb-32">
-          <PostHeader title={p.title} coverImage={p.coverImage} date={p.date} />
-          <PostBody content={p.content} />
+      <Header />
+      <article className="mb-32">
+        <PostHeader title={p.title} coverImage={p.coverImage} date={p.date} />
+        <PostBody content={p.content} />
 
-          <footer>
-            {p.tags && <Tags tags={p.tags} />}
-            <Paginator previous={previous} next={next} />
-          </footer>
-        </article>
-      </Container>
+        <footer>
+          {p.tags && <Tags tags={p.tags} />}
+          <Paginator previous={previous} next={next} />
+        </footer>
+      </article>
     </Normal>
   )
 }

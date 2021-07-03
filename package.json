@@ -2,7 +2,7 @@
   "name": "kcblog",
   "display": "KCBlog",
   "version": "0.1.0",
-  "description": "kamontat blog :)",
+  "description": "Personal blogs for collect and share purpose",
   "private": true,
   "scripts": {
     "dev": "next dev",

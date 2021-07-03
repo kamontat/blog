@@ -1,4 +1,6 @@
+import Container from "../misc/container"
 import Meta from "../misc/meta"
+import { Footer } from "./footer"
 
 type Props = {
   title?: string
@@ -12,9 +14,10 @@ export const Normal = ({ title, description, meta, children, image }: Props) => 
   return (
     <>
       <Meta title={title} description={description} meta={meta} image={image} />
-      <div className="min-h-screen">
-        <main>{children}</main>
-      </div>
+      <Container>
+        <main style={{ minHeight: "80vh" }}>{children}</main>
+        <Footer />
+      </Container>
     </>
   )
 }
