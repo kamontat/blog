@@ -1,3 +1,5 @@
+import { GetStaticProps } from "next"
+
 import { Normal } from "../components/layout"
 import Header from "../components/index/header"
 import HeroPost from "../components/index/hero-post"
@@ -23,7 +25,8 @@ const Index = ({ first, nexts }: Props) => {
     <Normal title={`${pjson.display} | KC`} image={post.coverImage}>
       <Container>
         <Header title={`${pjson.display}.`}>
-          Personal blogs for collect and share purpose using <Link url="https://nextjs.org/" name="Next.js" />.
+          Personal blogs for collect and share purpose using{" "}
+          <Link href="https://nextjs.org/" name="Next.js" underline="always" />.
         </Header>
         {post && post.isExist() && <HeroPost post={post} />}
         <p>{next && next.length > 0 && <Posts posts={next} />}</p>
@@ -34,8 +37,8 @@ const Index = ({ first, nexts }: Props) => {
 
 export default Index
 
-export const getStaticProps = async () => {
-  const posts = loadPosts(Post.minimialFields)
+export const getStaticProps: GetStaticProps = async ({ locale, defaultLocale }) => {
+  const posts = loadPosts(locale ?? defaultLocale ?? "", Post.minimialFields)
 
   const first = posts[0]
   const nexts = posts.slice(1)

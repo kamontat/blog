@@ -12,13 +12,14 @@ export type RawPost = {
 }
 
 export class Post {
-  static slugFields = ["slug"] as const
-  static minimialFields = ["slug", "title", "excerpt", "date", "coverImage", "tags"] as const
-  static fullFields = ["slug", "title", "excerpt", "date", "coverImage", "tags", "content"] as const
+  static slugFields = ["slug", "lang"] as const
+  static minimialFields = ["slug", "lang", "title", "excerpt", "date", "coverImage", "tags"] as const
+  static fullFields = ["slug", "lang", "title", "excerpt", "date", "coverImage", "tags", "content"] as const
 
   readonly type: PostType
   readonly url: string
   readonly slug: string
+  readonly lang?: string
   readonly title?: string
   readonly excerpt?: string
   readonly date?: Date
@@ -32,7 +33,9 @@ export class Post {
       this.url = `/?error=notfound&msg=slugmissing`
     } else {
       this.slug = json["slug"] ?? undefined
-      if (this.slug) this.url = `/posts/${this.slug}`
+      this.lang = json["lang"] ?? undefined
+      if (this.slug && this.lang) this.url = `${this.lang}/posts/${this.slug}`
+      else if (this.slug) this.url = `/posts/${this.slug}`
       else this.url = `/?error=notfound&msg=${this.slug}`
       this.title = json["title"] ?? undefined
       this.excerpt = json["excerpt"] ?? undefined

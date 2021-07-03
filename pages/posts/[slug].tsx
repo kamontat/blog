@@ -1,3 +1,4 @@
+import { GetStaticProps, GetStaticPaths, GetStaticPathsResult } from "next"
 import ErrorPage from "next/error"
 import { useRouter } from "next/router"
 
@@ -11,6 +12,7 @@ import Tags from "../../components/misc/tag"
 import { getPostBySlug, loadPPosts } from "../../lib/posts/apis"
 import { mdToHtml } from "../../lib/markdown"
 import { Post, RawPost } from "../../lib/posts/models"
+import { ParsedUrlQuery } from "querystring"
 
 type Props = {
   post: RawPost
@@ -45,12 +47,10 @@ const PostPage = ({ post, previous, next }: Props) => {
 
 export default PostPage
 
-type Params = {
-  params: {
-    slug: string
-    previous?: string
-    next?: string
-  }
+interface Params extends ParsedUrlQuery {
+  slug: string
+  previous?: string
+  next?: string
 }
 
 const toPost = async (slug: string): Promise<RawPost> => {
@@ -62,9 +62,18 @@ const toPost = async (slug: string): Promise<RawPost> => {
   }
 }
 
-export async function getStaticProps({ params }: Params) {
+export const getStaticProps: GetStaticProps<Props, Params> = async ({ params, locale, defaultLocale }) => {
+  if (!params) {
+    return {
+      redirect: {
+        permanent: true,
+        destination: "/?error=true&msg=paramnotfound",
+      },
+    }
+  }
+
   const props: Props = {
-    post: await toPost(params.slug),
+    post: await toPost(`${locale ?? defaultLocale}/${params.slug}`),
   }
 
   if (params.previous) {
@@ -79,16 +88,24 @@ export async function getStaticProps({ params }: Params) {
   }
 }
 
-export async function getStaticPaths() {
-  const posts = loadPPosts(Post.slugFields)
-  return {
-    paths: posts.map((post) => {
-      return {
+export const getStaticPaths: GetStaticPaths<Params> = async ({ locales, defaultLocale }) => {
+  const _locales: string[] = (locales ?? [defaultLocale]).filter((v) => v !== undefined) as string[]
+
+  const paths: GetStaticPathsResult<Params>["paths"] = []
+  _locales.forEach((locale) => {
+    const posts = loadPPosts(locale, Post.slugFields)
+    posts.forEach((post) => {
+      paths.push({
         params: {
           slug: post.slug,
         },
-      }
-    }),
+        locale: locale,
+      })
+    })
+  })
+
+  return {
+    paths,
     fallback: false,
   }
 }
