@@ -1,0 +1,21 @@
+---
+title: 'How to setup home server'
+excerpt: 'How to setup home server using raspberry PI4'
+date: '2021-07-03T12:00:00.000Z'
+tags:
+  - setup:t=blue
+  - pi
+  - network
+---
+
+# Setup home server
+
+Since last year, I brought 2 raspberry PI4 devices from [cytron.io](https://th.cytron.io/). I tried to setup home server using kubernetes but due to lack of maintainance so I decide to stop the server and left PI uptouch for couple of month. Last month I found one awesome repository for crypto bot [freqtrade](https://freqtrade.io). Couple of days of trying on digital ocean, I decide to hosted bot on my raspberry PI instead to avoid server payment that cause around 20$ per month. I will talk about my bot setup later on the next post.
+
+## Running with private ip
+
+Nowaday, network provider didn't give us a public IP so we have extra it to do for make our server reachable from outside world [howto](#setup-public-ip-with-cloudflare-argo)
+
+## Setup public ip with Cloudflare Argo
+
+abc

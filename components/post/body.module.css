@@ -2,6 +2,10 @@
   @apply text-lg leading-relaxed;
 }
 
+.markdown a {
+  @apply underline font-bold font-mono
+}
+
 .markdown p,
 .markdown ul,
 .markdown ol,

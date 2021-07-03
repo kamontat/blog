@@ -1,7 +1,7 @@
 import remark from "remark"
-import html from "remark-html"
+import remark2rehype from "remark-rehype"
 
 export const mdToHtml = async (md: string): Promise<string> => {
-  const file = await remark().use(html).process(md)
-  return file.toString("utf8")
+  const processor = remark().use(remark2rehype)
+  return processor.process(md).then((s) => s.toString("utf8"))
 }
