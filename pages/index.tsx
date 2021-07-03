@@ -22,7 +22,7 @@ const Index = ({ first, nexts }: Props) => {
     <Normal title={`${pjson.display} | KC`} image={post.coverImage}>
       <Header title={`${pjson.display}.`}>{pjson.description}.</Header>
       {post && post.isExist() && <HeroPost post={post} />}
-      <p>{next && next.length > 0 && <Posts posts={next} />}</p>
+      {next && next.length > 0 && <Posts posts={next} />}
     </Normal>
   )
 }

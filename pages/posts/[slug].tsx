@@ -7,8 +7,7 @@ import { useRouter } from "next/router"
 import { Normal, Header } from "../../components/layout"
 import PostHeader from "../../components/post/header"
 import PostBody from "../../components/post/body"
-import Paginator from "../../components/post/paginator"
-import Tags from "../../components/misc/tag"
+import Footer from "../../components/post/footer"
 
 import { getPostBySlug, loadPPosts } from "../../lib/posts/apis"
 import { mdToHtml } from "../../lib/markdown"
@@ -30,15 +29,11 @@ const PostPage = ({ post, previous, next }: Props) => {
   return (
     <Normal title={`${p.title} | KC`} description={p.excerpt} image={p.coverImage}>
       <Header />
-      <article className="mb-32">
+      <article className="mb-8">
         <PostHeader title={p.title} coverImage={p.coverImage} date={p.date} />
         <PostBody content={p.content} />
-
-        <footer>
-          {p.tags && <Tags tags={p.tags} />}
-          <Paginator previous={previous} next={next} />
-        </footer>
       </article>
+      <Footer tags={p.tags} previous={previous} next={next} />
     </Normal>
   )
 }
