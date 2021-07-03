@@ -13,10 +13,27 @@
   @apply my-6;
 }
 
-.markdown h2 {
-  @apply text-3xl mt-12 mb-4 leading-snug;
+.markdown div[name="header-group"] {
+  @apply flex flex-row;
 }
 
-.markdown h3 {
-  @apply text-2xl mt-8 mb-4 leading-snug;
+.markdown div[header="h2"] {
+  @apply text-3xl mt-10;
+}
+
+.markdown div[header="h3"] {
+  @apply text-2xl mt-8;
+}
+
+.markdown div[name="header-group"]:hover a[name="icon"] {
+  @apply pr-4 -ml-8;
+}
+
+.markdown div[name="header-group"]:hover a[name="icon"] span[name="link"]::before {
+  color: var(--color-gray);
+  content: "#";
+}
+
+.markdown a[name="icon"] {
+  @apply no-underline hover:underline;
 }
