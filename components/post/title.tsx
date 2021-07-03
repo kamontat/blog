@@ -11,7 +11,7 @@ const PostTitle = ({ children }: Props) => {
     "tracking-tighter",
     "leading-tight md:leading-none",
     "text-center md:text-left",
-    "mb-12"
+    "mb-4"
   )
 
   return <h1 className={classnames}>{children}</h1>

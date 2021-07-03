@@ -12,11 +12,14 @@ type Props = {
 const PostHeader = ({ title, coverImage, date }: Props) => {
   return (
     <>
-      <PostTitle>{title}</PostTitle>
+      <div className="mb-12">
+        <PostTitle>{title}</PostTitle>
+        <div className="text-lg">{date && <Time date={date} location="left" />}</div>
+      </div>
+
       <div className="mb-5 md:mb-12 sm:mx-0">
         <CoverImage src={coverImage} title={title} />
       </div>
-      <div className="mb-6 text-lg">{date && <Time date={date} location="right" />}</div>
     </>
   )
 }
