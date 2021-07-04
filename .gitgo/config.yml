@@ -30,14 +30,19 @@ settings:
           page: 5
           suggestion: false
           values:
-            - key: core
-              text: Core modules of application
-            - key: model
-              text: Application models
-            - key: api
-              text: Application program interface
+            - key: ui
+              text: User interface or frontend design
+            - key: lib
+              text: All data from lib directory
             - key: deps
-              text: Application dependencies
+              text: Dependencies
+            - key: script
+              text: Internal scripts
+            - key: docs
+              text: Documentation included only README and CHANGELOG
+            - key: posts
+              text: Posts in _posts/en and _posts/th directories
+
     title:
       enabled: true
       required: true
