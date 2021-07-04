@@ -1,11 +1,11 @@
 import type React from "react"
-import type { Node } from "unist"
+// import type { Node } from "unist"
 
 import CImage from "../misc/image"
 import defaultImage from "../../public/assets/posts/default.jpeg"
 
 type Props = {
-  node: Node
+  // node: Node
   src?: string
   alt?: string
 }

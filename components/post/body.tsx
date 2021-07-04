@@ -5,7 +5,7 @@ type Props = {
 const PostBody = ({ children }: Props) => {
   return (
     <div className="mx-auto">
-      <article className="prose prose-lg lg:prose-xl prose-blue">{children}</article>
+      <article className="prose prose-lg lg:prose-xl">{children}</article>
     </div>
   )
 }

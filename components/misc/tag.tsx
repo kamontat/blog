@@ -1,6 +1,5 @@
 import cn from "classnames"
 import type { Tag } from "../../lib/posts/tag"
-import { parseTag } from "../../lib/tags"
 
 type TagProps = {
   tag: Tag
