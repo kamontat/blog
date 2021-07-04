@@ -1,5 +1,7 @@
+import type React from "react"
 import type { GetStaticProps, GetStaticPaths, GetStaticPathsResult } from "next"
 import type { ParsedUrlQuery } from "querystring"
+import { Post, SerizalizePost } from "../../lib/posts/post"
 
 import ErrorPage from "next/error"
 import { useRouter } from "next/router"
@@ -9,15 +11,12 @@ import PostHeader from "../../components/post/header"
 import PostBody from "../../components/post/body"
 import Footer from "../../components/post/footer"
 
-import { getPostBySlug, loadPPosts } from "../../lib/posts/apis"
-import { mdToHtml } from "../../lib/markdown"
-import { Post, RawPost } from "../../lib/posts/models"
-import type React from "react"
+import { buildPost, loadSlugs } from "../../lib/posts/file"
 
 type Props = {
-  post: RawPost
-  previous?: RawPost
-  next?: RawPost
+  post: SerizalizePost
+  previous?: SerizalizePost
+  next?: SerizalizePost
 }
 
 const PostPage = ({ post, previous, next }: Props) => {
@@ -26,15 +25,29 @@ const PostPage = ({ post, previous, next }: Props) => {
     return <ErrorPage statusCode={404} />
   }
 
-  const p = new Post(post)
+  const p = Post.deserialize(post)
   return (
-    <Normal title={`${p.title} | KC`} description={p.excerpt} image={p.coverImage}>
+    <Normal
+      title={p.metadata.title}
+      description={p.metadata.excerpt}
+      image={p.metadata.coverImage}
+      meta={[
+        {
+          property: "article:id",
+          content: p.slug.id.toString(),
+        },
+        {
+          property: "article:published_time",
+          content: p.metadata.date ?? "",
+        },
+      ].concat(p.metadata.tags.map((tag) => ({ property: "article:tag", content: tag.name })))}
+    >
       <Header />
       <article className="mb-8">
-        <PostHeader title={p.title} coverImage={p.coverImage} date={p.date} />
-        <PostBody>{p.generateReact()}</PostBody>
+        <PostHeader metadata={p.metadata} draft={p.slug.isDraft} />
+        <PostBody>{p.process()}</PostBody>
       </article>
-      <Footer tags={p.tags} previous={previous} next={next} />
+      <Footer tags={p.metadata.tags} previous={previous} next={next} />
     </Normal>
   )
 }
@@ -47,10 +60,6 @@ interface Params extends ParsedUrlQuery {
   next?: string
 }
 
-const toPost = async (slug: string): Promise<RawPost> => {
-  return getPostBySlug(slug, Post.fullFields)
-}
-
 export const getStaticProps: GetStaticProps<Props, Params> = async ({ params, locale, defaultLocale }) => {
   if (!params) {
     return {
@@ -61,15 +70,31 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params, lo
     }
   }
 
-  const props: Props = {
-    post: await toPost(`${locale ?? defaultLocale}/${params.slug}`),
+  const lang = locale ?? defaultLocale ?? ""
+  const slugs = loadSlugs(lang).filter((v) => !v.isDraft)
+
+  const slugIndex = slugs.findIndex((v) => v.name === params.slug)
+  if (slugIndex < 0) {
+    throw new Error(`cannot found slug from name: ${params.slug}`)
   }
 
-  if (params.previous) {
-    props.previous = await toPost(params.previous)
+  const max = slugs.length - 1
+  const min = 0
+
+  const props: Props = {
+    post: buildPost(slugs[slugIndex]).serialize(),
   }
-  if (params.next) {
-    props.next = await toPost(params.next)
+
+  if (slugIndex > min) {
+    props.previous = buildPost(slugs[slugIndex - 1]).serialize()
+  } else {
+    props.previous = buildPost(slugs[max]).serialize()
+  }
+
+  if (slugIndex < max) {
+    props.next = buildPost(slugs[slugIndex + 1]).serialize()
+  } else {
+    props.next = buildPost(slugs[min]).serialize()
   }
 
   return {
@@ -82,11 +107,11 @@ export const getStaticPaths: GetStaticPaths<Params> = async ({ locales, defaultL
 
   const paths: GetStaticPathsResult<Params>["paths"] = []
   _locales.forEach((locale) => {
-    const posts = loadPPosts(locale, Post.slugFields)
-    posts.forEach((post) => {
+    const slugs = loadSlugs(locale)
+    slugs.forEach((slug) => {
       paths.push({
         params: {
-          slug: post.slug,
+          slug: slug.name,
         },
         locale: locale,
       })

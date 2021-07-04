@@ -1,25 +1,22 @@
 import cn from "classnames"
+import type { Tag } from "../../lib/posts/tag"
 import { parseTag } from "../../lib/tags"
 
 type TagProps = {
-  name: string
+  tag: Tag
 }
 
 type TagsProps = {
-  tags: string[]
+  tags: Tag[]
 }
 
-const Tag = ({ name }: TagProps) => {
-  const tag = parseTag(name)
-  const bg = tag.bg ? tag.bg : "#CDD6E6"
-  const fg = tag.fg ? tag.fg : "#505050"
-
+const Badge = ({ tag }: TagProps) => {
   return (
     <div
       className={cn("px-6", "py-0.5", "rounded-md")}
       style={{
-        color: fg,
-        backgroundColor: bg,
+        color: tag.textColor,
+        backgroundColor: tag.bgColor,
       }}
     >
       <small className="text-base font-mono">{tag.name}</small>
@@ -31,7 +28,7 @@ const Tags = ({ tags }: TagsProps) => {
   return (
     <div className="flex flex-row flex-wrap gap-2">
       {tags.map((tag) => {
-        return <Tag key={tag} name={tag} />
+        return <Badge key={tag.name} tag={tag} />
       })}
     </div>
   )

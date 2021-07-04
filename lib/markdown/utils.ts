@@ -38,6 +38,6 @@ export const mdToHtml = (md: string): React.ReactElement => {
       //     "*": ["id", "name", "className", "header", "href", "src", "target", "tabIndex", "ariaHidden", "align"],
       //   },
       // })
-      .processSync(md).result as unknown as React.ReactElement
+      .processSync(md).result as React.ReactElement
   )
 }

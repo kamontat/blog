@@ -1,15 +1,16 @@
 import classNames from "classnames"
-import { format } from "date-fns"
+import { format, parseISO } from "date-fns"
 import Image from "next/image"
 
 import clock from "../../public/assets/icons/clock.png"
 
 type Props = {
-  date: Date
+  date: string
   location?: "right" | "left"
 }
 
 const Time = ({ date, location }: Props) => {
+  const datetime = parseISO(date)
   const cn = classNames(
     "flex",
     "flex-row",
@@ -20,7 +21,7 @@ const Time = ({ date, location }: Props) => {
   return (
     <div className={cn}>
       <Image src={clock} alt="clock icon for publish time" width={25} height={25} />
-      <time dateTime={date.toISOString()}>{format(date, "LLLL	d, yyyy")}</time>
+      <time dateTime={datetime.toISOString()}>{format(datetime, "LLLL	d, yyyy")}</time>
     </div>
   )
 }

@@ -5,15 +5,16 @@ import pjson from "../../package.json"
 type Props = {
   title?: string
   description?: string
+  type?: "website" | "article"
   meta?: Record<string, string>[]
   image?: string
 }
 
-const Meta = ({ title, description, meta, image }: Props) => {
+const Meta = ({ title, description, type, meta, image }: Props) => {
   const rounter = useRouter()
   return (
     <Head>
-      {title && <title>{title}</title>}
+      {title && <title>{title} | KC</title>}
 
       <link rel="manifest" href="/site.webmanifest" />
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -36,9 +37,8 @@ const Meta = ({ title, description, meta, image }: Props) => {
           return <meta key={l} property="og:locale:alternate" content={l} />
         })}
 
-      <meta property="og:type" content="website" />
       {image && <meta property="og:image" content={image} />}
-
+      <meta property="og:type" content={type ?? "website"} />
       {meta &&
         meta.map((m, i) => {
           return <meta key={i} {...m} />

@@ -1,17 +1,22 @@
-import type { RawPost } from "../../lib/posts/models"
+import Posts from "../index/posts"
+import type { SerizalizePost } from "../../lib/posts/post"
+import { Post } from "../../lib/posts/post"
 
 type Props = {
-  previous?: RawPost
-  next?: RawPost
+  previous?: SerizalizePost
+  next?: SerizalizePost
 }
 
 const Paginator = ({ previous, next }: Props) => {
-  return (
-    <div className="flex flex-row flex-nowrap justify-between">
-      {previous && <div>{previous}</div>}
-      {next && <div>{next}</div>}
-    </div>
-  )
+  const posts: Post[] = []
+  if (previous) {
+    posts.push(Post.deserialize(previous))
+  }
+  if (next) {
+    posts.push(Post.deserialize(next))
+  }
+
+  return <Posts posts={posts} />
 }
 
 export default Paginator

@@ -1,12 +1,13 @@
-import type { RawPost } from "../../lib/posts/models"
+import type { Tag } from "../../lib/posts/tag"
+import type { SerizalizePost } from "../../lib/posts/post"
 
 import Tags from "../misc/tag"
 import Paginator from "./paginator"
 
 type Props = {
-  tags?: string[]
-  previous?: RawPost
-  next?: RawPost
+  tags?: Tag[]
+  previous?: SerizalizePost
+  next?: SerizalizePost
 }
 
 const Footer = ({ tags, previous, next }: Props) => {
@@ -16,7 +17,7 @@ const Footer = ({ tags, previous, next }: Props) => {
 
   return (
     <footer className="mt-4">
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row justify-between border-b pb-5 mb-12">
         {tags && <Tags tags={tags} />}
         <a className="text-base font-mono hover:underline hover:text-primary cursor-pointer" onClick={toTop}>
           UP

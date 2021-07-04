@@ -1,27 +1,27 @@
 import type { GetStaticProps } from "next"
+import { Post, SerizalizePost } from "../lib/posts/post"
 
 import { Normal } from "../components/layout"
 import Header from "../components/index/header"
 import HeroPost from "../components/index/hero-post"
 import Posts from "../components/index/posts"
 
-import { loadPosts } from "../lib/posts/apis"
-import { RawPost, Post } from "../lib/posts/models"
+import { buildPostMeta, loadSlugs } from "../lib/posts/file"
 
 import pjson from "../package.json"
 
 type Props = {
-  first: RawPost
-  nexts: RawPost[]
+  first: SerizalizePost
+  nexts: SerizalizePost[]
 }
 
 const Index = ({ first, nexts }: Props) => {
-  const post = new Post(first)
-  const next = nexts.map((n) => new Post(n))
+  const post = Post.deserialize(first)
+  const next = nexts.map((n) => Post.deserialize(n))
   return (
-    <Normal title={`${pjson.display} | KC`} image={post.coverImage}>
+    <Normal title={pjson.display} image={post.metadata.coverImage}>
       <Header title={`${pjson.display}.`}>{pjson.description}.</Header>
-      {post && post.isExist() && <HeroPost post={post} />}
+      {post && <HeroPost post={post} />}
       {next && next.length > 0 && <Posts posts={next} />}
     </Normal>
   )
@@ -30,7 +30,12 @@ const Index = ({ first, nexts }: Props) => {
 export default Index
 
 export const getStaticProps: GetStaticProps = async ({ locale, defaultLocale }) => {
-  const posts = loadPosts(locale ?? defaultLocale ?? "", Post.minimialFields)
+  const posts = loadSlugs(locale ?? defaultLocale ?? "")
+    .filter((v) => !v.isDraft)
+    .sort((a, b) => {
+      return a.id - b.id
+    })
+    .map((slug) => buildPostMeta(slug).serialize())
 
   const first = posts[0]
   const nexts = posts.slice(1)
