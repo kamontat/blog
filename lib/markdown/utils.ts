@@ -1,11 +1,6 @@
-import type { Plugin, Transformer } from "unified"
-import type { Node } from "unist"
-
 import React from "react"
 import Image from "../../components/markdown/image"
 import Gist from "../../components/misc/gist"
-
-import visit from "unist-util-visit"
 
 import remark from "remark"
 import gfm from "remark-gfm"
@@ -17,32 +12,11 @@ import directive from "remark-directive"
 import remark2rehype from "remark-rehype"
 
 import link from "rehype-autolink-headings"
-import sanitize from "rehype-sanitize"
 import highlight from "rehype-highlight"
+import sanitize from "rehype-sanitize"
 import rehype2react from "rehype-react"
 
-const directiveHandler: Plugin = () => {
-  const transform: Transformer = (node) => {
-    visit(node, ["textDirective", "leafDirective", "containerDirective"], onDirective)
-  }
-  const onDirective: visit.Visitor<Node> = (node, _, parent) => {
-    if (parent) {
-      parent.data = {}
-      parent.children = []
-      if (!parent.data) parent.data = {}
-      parent.data.hName = node.name
-      parent.data.hProperties = node.attributes
-
-      return visit.SKIP
-    }
-
-    if (!node.data) node.data = {}
-    node.data.hName = node.name
-    node.data.hProperties = node.attributes
-  }
-
-  return transform
-}
+import htmlDirective from "./plugins/html-directive"
 
 export const mdToHtml = (md: string): React.ReactElement => {
   const processor = remark()
@@ -53,14 +27,13 @@ export const mdToHtml = (md: string): React.ReactElement => {
     .use(toc)
     .use(external, { target: "_blank" })
     .use(directive)
-    .use(directiveHandler)
+    .use(htmlDirective)
     .use(remark2rehype, { allowDangerousHtml: true })
     .use(highlight)
     .use(link, { behavior: "wrap", properties: { ariaHidden: true, tabIndex: -1 } })
     .use(rehype2react, {
       createElement: React.createElement,
       Fragment: React.Fragment,
-      // passNode: true,
       components: {
         img: Image,
         gist: Gist,
