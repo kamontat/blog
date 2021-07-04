@@ -20,32 +20,21 @@ fi
 
 echo "[2/$total_step] list all tags that already exist:"
 git tag --column
+echo
 
-exit_keyword=""
 version="v$(jq -r .version <package.json)"
-first=true
-while true; do
-  if [[ "$version" =~ ^v ]]; then # must has prefix v
-    if ! git tag | grep -q "^$version$"; then
-      if $first; then
-        printf "[3/%s] Auto valid version (v0.0.0): %s\n" "$total_step" "$version"
-      fi
-
-      break
-    fi
+valid=false
+if [[ "$version" =~ ^v ]]; then # must has prefix v
+  if ! git tag | grep -q "^$version$"; then
+    printf "[3/%s] Auto valid version (v0.0.0): %s\n" "$total_step" "$version"
+    valid=true
   fi
+fi
 
-  first=false
-  printf "[3/%s] Enter valid version (v0.0.0): " "$total_step"
-  read -r ans
-  if [[ $ans == "$exit_keyword" ]]; then
-    echo "bye-bye"
-    exit 0
-  fi
-
-  version="$ans"
-done
-test -z "$version" && exit 1
+if ! $valid; then
+  echo "please update your package.json version first: (current=$version)" >&2
+  exit 1
+fi
 
 echo "[4/$total_step] create release note"
 git-chglog --next-tag "$version" --output _posts/CHANGELOG.md
