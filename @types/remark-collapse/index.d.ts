@@ -1,6 +1,6 @@
 import { Plugin } from "unified"
 
-declare module "remark-images" {
+declare module "remark-collapse" {
   declare const remark: Plugin
   export = remark
 }
