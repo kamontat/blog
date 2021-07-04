@@ -23,9 +23,14 @@ git tag --column
 
 exit_keyword=""
 
-valid=false
-version=""
-while [[ "$valid" == "false" ]]; do
+version="$(jq -r .version <package.json)"
+while true; do
+  if [[ "$version" =~ ^v ]]; then # must has prefix v
+    if ! git tag | grep -q "^$version$"; then
+      break
+    fi
+  fi
+
   printf "[3/%s] Enter valid version (v0.0.0): " "$total_step"
   read -r ans
   if [[ $ans == "$exit_keyword" ]]; then
@@ -34,13 +39,10 @@ while [[ "$valid" == "false" ]]; do
   fi
 
   version="$ans"
-  if [[ "$version" =~ ^v ]]; then # must has prefix v
-    if ! git tag | grep -q "^$version$"; then
-      valid=true
-    fi
-  fi
 done
 test -z "$version" && exit 1
+
+exit 0
 
 echo "[4/$total_step] create release note"
 git-chglog --next-tag "$version" --output __posts/CHANGELOG.md
