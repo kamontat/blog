@@ -18,7 +18,9 @@ const PostPreview = ({ post }: Props) => {
       <h3 className="text-3xl mb-3 leading-snug">
         <Link as={`/posts/${post.slug.name}`} href="/posts/[slug]" name={post.metadata.title} />
       </h3>
-      <div className="text-lg mb-4">{post.metadata.date && <Time date={post.metadata.date} />}</div>
+      <div className="text-lg mb-4">
+        {post.metadata.date && <Time date={post.metadata.date} duration={post.readTimePerSecond} />}
+      </div>
       <p className="text-lg leading-relaxed mb-4">{post.metadata.excerpt}</p>
       {post.metadata.tags && <Tags tags={post.metadata.tags} />}
     </div>

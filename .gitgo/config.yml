@@ -32,6 +32,8 @@ settings:
           values:
             - key: ui
               text: User interface or frontend design
+            - key: core
+              text: All react code change but not effect UI/UX
             - key: lib
               text: All data from lib directory
             - key: deps

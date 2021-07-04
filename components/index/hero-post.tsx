@@ -22,7 +22,7 @@ const HeroPost = ({ post }: Props) => {
           </h3>
           {post.metadata.date && (
             <div className="mb-4 md:mb-0 text-lg">
-              <Time date={post.metadata.date} />
+              <Time date={post.metadata.date} duration={post.readTimePerSecond} />
             </div>
           )}
         </div>
