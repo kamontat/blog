@@ -6,17 +6,20 @@ import PostTitle from "./title"
 
 type Props = {
   metadata: Metadata
+  readtime: number
   draft: boolean
 }
 
-const PostHeader = ({ metadata, draft }: Props) => {
+const PostHeader = ({ metadata, draft, readtime }: Props) => {
   return (
     <>
       <div className="mb-12">
         <PostTitle>
           {metadata.title} {draft && "[draft]"}
         </PostTitle>
-        <div className="text-lg">{metadata.date && <Time date={metadata.date} location="left" />}</div>
+        <div className="text-lg">
+          {metadata.date && <Time date={metadata.date} duration={readtime} location="left" />}
+        </div>
       </div>
 
       <div className="mb-5 md:mb-12 sm:mx-0">

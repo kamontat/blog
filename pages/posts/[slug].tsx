@@ -44,7 +44,7 @@ const PostPage = ({ post, previous, next }: Props) => {
     >
       <Header />
       <article className="mb-8">
-        <PostHeader metadata={p.metadata} draft={p.slug.isDraft} />
+        <PostHeader metadata={p.metadata} draft={p.slug.isDraft} readtime={p.readTimePerSecond} />
         <PostBody>{p.process()}</PostBody>
       </article>
       <Footer tags={p.metadata.tags} previous={previous} next={next} />
@@ -71,7 +71,7 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params, lo
   }
 
   const lang = locale ?? defaultLocale ?? ""
-  const slugs = loadSlugs(lang).filter((v) => !v.isDraft)
+  const slugs = loadSlugs(lang)
 
   const slugIndex = slugs.findIndex((v) => v.name === params.slug)
   if (slugIndex < 0) {
