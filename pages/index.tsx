@@ -33,7 +33,7 @@ export const getStaticProps: GetStaticProps = async ({ locale, defaultLocale }) 
   const posts = loadSlugs(locale ?? defaultLocale ?? "")
     .filter((v) => !v.isDraft)
     .sort((a, b) => {
-      return a.id - b.id
+      return b.id - a.id
     })
     .map((slug) => buildPostMeta(slug).serialize())
 
