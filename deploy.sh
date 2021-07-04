@@ -10,12 +10,16 @@
 
 total_step=7
 
-echo "[1/$total_step] validate settings and repository:"
+echo "[1/$total_step] validate repository:"
 if ! git diff --quiet --ignore-submodules; then
-  echo "your worktree is not clean"
   git status --short --ignore-submodules
 
-  exit 1
+  printf "Are you sure, you still has some changes [Y|n]: "
+  read -r ans
+  if [[ $ans != "Y" ]] && [[ $ans != "y" ]]; then
+    echo "exit"
+    exit 0
+  fi
 fi
 
 echo "[2/$total_step] list all tags that already exist:"
@@ -40,7 +44,8 @@ echo "[4/$total_step] create release note"
 git-chglog --next-tag "$version" --output _posts/CHANGELOG.md
 
 echo "[5/$total_step] commit changes with release version message"
-git commit --allow-empty -am "chore(release): version $version"
+git add .
+git commit --allow-empty -m "chore(release): version $version"
 
 echo "[6/$total_step] create new git tag called '$version'"
 git tag "$version"

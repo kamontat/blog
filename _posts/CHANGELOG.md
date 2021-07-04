@@ -1,4 +1,22 @@
 
+<a name="v0.3.1"></a>
+## [v0.3.1](https://github.com/kamontat/blog/compare/v0.3.0...v0.3.1) (2021-07-05)
+
+### Chore
+
+* throw error if package.json version is not increase
+* **docs:** auto commit changelog not works, so manually it
+
+### Fix
+
+* **core:** duration on time are missing on index pages
+* **script:** wrong location of CHANGELOG
+
+### Perf
+
+* **deps:** add more scope on gitgo
+
+
 <a name="v0.3.0"></a>
 ## v0.3.0 (2021-07-05)
 
@@ -11,6 +29,7 @@
 * codeql analysis
 * **dep:** update dependencies version
 * **deps:** add gitgo, kodiak, and dependabot.
+* **release:** version v0.3.0
 
 ### Feat
 
