@@ -6,7 +6,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: "#0070f3",
+        primary: "#005AC2",
+        "primary-dark": "#00489B",
       },
       spacing: {
         28: "7rem",
@@ -23,13 +24,19 @@ module.exports = {
         "7xl": "4.5rem",
         "8xl": "6.25rem",
       },
-      typography: {
+      typography: (theme) => ({
         DEFAULT: {
           css: {
             maxWidth: "100%",
+            a: {
+              color: false,
+              "&:hover": {
+                color: theme("colors.primary"),
+              },
+            },
           },
         },
-      },
+      }),
     },
   },
 }
