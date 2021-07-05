@@ -7,6 +7,10 @@ type Props = {
 }
 
 const Posts = ({ posts }: Props) => {
+  if (posts.length < 1) {
+    return <div />
+  }
+
   return (
     <section>
       <h2 className="mb-8 text-6xl md:text-7xl font-bold tracking-tighter leading-tight">More Stories</h2>
