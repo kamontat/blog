@@ -10,17 +10,8 @@
 
 total_step=7
 
-echo "[1/$total_step] validate repository:"
-if ! git diff --quiet --ignore-submodules; then
-  git status --short --ignore-submodules
-
-  printf "Are you sure, you still has some changes [Y|n]: "
-  read -r ans
-  if [[ $ans != "Y" ]] && [[ $ans != "y" ]]; then
-    echo "exit"
-    exit 0
-  fi
-fi
+echo "[1/$total_step] print current changes:"
+git status --short --ignore-submodules
 
 echo "[2/$total_step] list all tags that already exist:"
 git tag --column

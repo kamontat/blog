@@ -1,4 +1,16 @@
 
+<a name="v0.3.4"></a>
+## [v0.3.4](https://github.com/kamontat/blog/compare/v0.3.3...v0.3.4) (2021-07-05)
+
+### Bug Fixes
+
+* **ui:** more stories panel on post should not show draft article
+
+### Improvement
+
+* **ui:** remove more stories when not posts left
+
+
 <a name="v0.3.3"></a>
 ## [v0.3.3](https://github.com/kamontat/blog/compare/v0.3.2...v0.3.3) (2021-07-05)
 
