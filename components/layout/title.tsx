@@ -2,10 +2,11 @@ import Link from "../misc/link"
 
 type Props = {
   title: string
-  children: React.ReactNode
+  children?: React.ReactNode
 }
 
-const Header = ({ title, children }: Props) => {
+// Similar to header but bigger title
+const TitleHeader = ({ title, children }: Props) => {
   return (
     <section className="flex-col md:flex-row flex items-center md:justify-between mt-16 mb-16 md:mb-12">
       <div className="flex flex-col w-full">
@@ -16,10 +17,10 @@ const Header = ({ title, children }: Props) => {
             <Link href="/" locale={"th"} name="TH" underline="hover" />
           </div>
         </div>
-        <h4 className="text-center md:text-left text-lg">{children}</h4>
+        {children && <h4 className="text-center md:text-left text-lg">{children}</h4>}
       </div>
     </section>
   )
 }
 
-export default Header
+export default TitleHeader

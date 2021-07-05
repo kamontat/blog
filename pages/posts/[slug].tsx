@@ -8,8 +8,8 @@ import { useRouter } from "next/router"
 
 import { Normal, Header } from "../../components/layout"
 import PostHeader from "../../components/post/header"
-import PostBody from "../../components/post/body"
 import Footer from "../../components/post/footer"
+import Body from "../../components/markdown/body"
 
 import { buildPost, loadSlugs } from "../../lib/posts/file"
 
@@ -45,7 +45,7 @@ const PostPage = ({ post, previous, next }: Props) => {
       <Header />
       <article className="mb-8">
         <PostHeader metadata={p.metadata} draft={p.slug.isDraft} readtime={p.readTimePerSecond} />
-        <PostBody>{p.process()}</PostBody>
+        <Body>{p.process()}</Body>
       </article>
       <Footer tags={p.metadata.tags} previous={previous} next={next} />
     </Normal>

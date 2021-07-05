@@ -2,7 +2,7 @@ type Props = {
   children?: React.ReactElement
 }
 
-const PostBody = ({ children }: Props) => {
+const MdBody = ({ children }: Props) => {
   return (
     <div className="mx-auto">
       <article className="prose prose-lg lg:prose-xl">{children}</article>
@@ -10,4 +10,4 @@ const PostBody = ({ children }: Props) => {
   )
 }
 
-export default PostBody
+export default MdBody

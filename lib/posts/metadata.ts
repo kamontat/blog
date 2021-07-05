@@ -1,5 +1,5 @@
 import { Tag } from "./tag"
-import { getOrElse, getOrFalse, getOrThrow } from "./utils"
+import { getOrElse, getOrFalse } from "./utils"
 
 export interface SerizalizeMetadata {
   title: string
@@ -11,7 +11,7 @@ export interface SerizalizeMetadata {
 
 export class Metadata {
   static build(data: Record<string, any>): Metadata {
-    const title = getOrThrow<string>(data, "title")
+    const title = getOrElse<string>(data, "title", "")
     const excerpt = getOrElse<string>(data, "excerpt", title)
     const coverImage = getOrFalse<string>(data, "coverImage")
     const date = getOrFalse<string>(data, "date")

@@ -2,7 +2,7 @@ import type { GetStaticProps } from "next"
 import { Post, SerizalizePost } from "../lib/posts/post"
 
 import { Normal } from "../components/layout"
-import Header from "../components/index/header"
+import Title from "../components/layout/title"
 import HeroPost from "../components/index/hero-post"
 import Posts from "../components/index/posts"
 
@@ -20,7 +20,7 @@ const Index = ({ first, nexts }: Props) => {
   const next = nexts.map((n) => Post.deserialize(n))
   return (
     <Normal title={pjson.display} image={post.metadata.coverImage}>
-      <Header title={`${pjson.display}.`}>{pjson.description}.</Header>
+      <Title title={`${pjson.display}.`}>{pjson.description}.</Title>
       {post && <HeroPost post={post} />}
       {next && next.length > 0 && <Posts posts={next} />}
     </Normal>
