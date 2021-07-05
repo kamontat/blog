@@ -39,4 +39,8 @@ export class Slug {
 
     return `${lang}${draft}${prefix}${name}${ext}`
   }
+
+  equal(s: Slug): boolean {
+    return s.toFilename() === this.toFilename()
+  }
 }
