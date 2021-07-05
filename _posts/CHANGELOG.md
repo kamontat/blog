@@ -1,4 +1,12 @@
 
+<a name="v0.3.3"></a>
+## [v0.3.3](https://github.com/kamontat/blog/compare/v0.3.2...v0.3.3) (2021-07-05)
+
+### Improvement
+
+* **post:** add info to knowledge requirement
+
+
 <a name="v0.3.2"></a>
 ## [v0.3.2](https://github.com/kamontat/blog/compare/v0.3.1...v0.3.2) (2021-07-05)
 
