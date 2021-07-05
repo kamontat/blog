@@ -1,7 +1,7 @@
 import type React from "react"
 import type { GetStaticProps, GetStaticPaths, GetStaticPathsResult } from "next"
 import type { ParsedUrlQuery } from "querystring"
-import { Post, SerizalizePost } from "../../lib/posts/post"
+import type { Slug } from "../../lib/posts/slug"
 
 import ErrorPage from "next/error"
 import { useRouter } from "next/router"
@@ -12,6 +12,7 @@ import Footer from "../../components/post/footer"
 import Body from "../../components/markdown/body"
 
 import { buildPost, loadSlugs } from "../../lib/posts/file"
+import { Post, SerizalizePost } from "../../lib/posts/post"
 
 type Props = {
   post: SerizalizePost
@@ -60,6 +61,20 @@ interface Params extends ParsedUrlQuery {
   next?: string
 }
 
+const findSlug = (slugs: Slug[], index: number, shift: 1 | -1): Slug | undefined => {
+  const limit = slugs.length
+  for (let i = index + shift, c = 0; c < limit; i += shift, c++) {
+    if (i < 0) i = limit - 1
+    else if (i >= limit) i = 0
+    const s = slugs[i]
+    if (!s.isDraft && index !== i) {
+      return s
+    }
+  }
+
+  return undefined
+}
+
 export const getStaticProps: GetStaticProps<Props, Params> = async ({ params, locale, defaultLocale }) => {
   if (!params) {
     return {
@@ -78,23 +93,22 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params, lo
     throw new Error(`cannot found slug from name: ${params.slug}`)
   }
 
-  const max = slugs.length - 1
-  const min = 0
-
   const props: Props = {
     post: buildPost(slugs[slugIndex]).serialize(),
   }
 
-  if (slugIndex > min) {
-    props.previous = buildPost(slugs[slugIndex - 1]).serialize()
-  } else {
-    props.previous = buildPost(slugs[max]).serialize()
-  }
+  const previous = findSlug(slugs, slugIndex, -1)
+  const next = findSlug(slugs, slugIndex, 1)
 
-  if (slugIndex < max) {
-    props.next = buildPost(slugs[slugIndex + 1]).serialize()
+  if (previous && next && previous.equal(next)) {
+    props.next = buildPost(next).serialize()
   } else {
-    props.next = buildPost(slugs[min]).serialize()
+    if (previous) {
+      props.previous = buildPost(previous).serialize()
+    }
+    if (next) {
+      props.next = buildPost(next).serialize()
+    }
   }
 
   return {
