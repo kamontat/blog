@@ -1,18 +1,25 @@
 
+<a name="v0.3.2"></a>
+## [v0.3.2](https://github.com/kamontat/blog/compare/v0.3.1...v0.3.2) (2021-07-05)
+
+### Features
+
+* **ui:** update footer by adding changelog and tailwind
+
+### Improvement
+
+* **posts:** add image to en/3 for prometheus section
+
+
 <a name="v0.3.1"></a>
 ## [v0.3.1](https://github.com/kamontat/blog/compare/v0.3.0...v0.3.1) (2021-07-05)
 
-### Chore
-
-* throw error if package.json version is not increase
-* **docs:** auto commit changelog not works, so manually it
-
-### Fix
+### Bug Fixes
 
 * **core:** duration on time are missing on index pages
 * **script:** wrong location of CHANGELOG
 
-### Perf
+### Improvement
 
 * **deps:** add more scope on gitgo
 
@@ -20,30 +27,19 @@
 <a name="v0.3.0"></a>
 ## v0.3.0 (2021-07-05)
 
-### Chore
-
-* deploy will read version from package.json
-* add deploy scripts and add CHANGELOG template
-* revise some text
-* remove sanitize due to not support gist
-* codeql analysis
-* **dep:** update dependencies version
-* **deps:** add gitgo, kodiak, and dependabot.
-* **release:** version v0.3.0
-
-### Feat
-
-* update posts, update article css, and add gtm
-* integrate with rehype processor
-* **ui:** add read time
-
-### Fix
+### Bug Fixes
 
 * gtm is not load by default
 * **lint:** update missing def params
 * **script:** update deploy to support auto version
 
-### Perf
+### Features
+
+* update posts, update article css, and add gtm
+* integrate with rehype processor
+* **ui:** add read time
+
+### Improvement
 
 * modify posts id and add new images
 * move date to article name
@@ -57,11 +53,4 @@
 * **ui:** add website version to footer
 * **ui:** change link element on article markdown
 * **ui:** update several place of UI/UX and features
-
-### Refac
-
-* move html directive to new file
-* update [@types](https://github.com/types)
-* modify same code not relate to project
-* **post:** update post, unify logic and add previous/next post
 
