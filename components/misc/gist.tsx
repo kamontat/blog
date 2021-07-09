@@ -21,7 +21,7 @@ const toSize = (base?: number | string, maximum?: number): string => {
 }
 
 const Gist = ({ username, id, filename, width, maxWidth, height, maxHeight }: Props) => {
-  const [autoWidth, _setWidth] = useState(width)
+  const [autoWidth, _setWidth] = useState(toSize(width, maxWidth))
   const [autoHeight, setHeight] = useState(height)
 
   // default username is kamontat
@@ -35,13 +35,17 @@ const Gist = ({ username, id, filename, width, maxWidth, height, maxHeight }: Pr
     const height = obj.currentTarget.contentDocument?.body.scrollHeight
     setHeight(height && height + 30)
   }
+
   return (
-    <div className="w-full h-full" style={{ width, height }}>
+    <div className="w-full h-full">
       <iframe
         title={title}
-        width={toSize(autoWidth, maxWidth)}
-        height={toSize(autoHeight, maxHeight ?? 600)}
-        srcDoc={`<!DOCTYPE html><html><head></head><body><script src="${gist}"></script></body></html>`}
+        width={autoWidth}
+        height={autoHeight}
+        srcDoc={`<!DOCTYPE html><html><style type="text/css">.gist-data {max-width: ${autoWidth};max-height: ${toSize(
+          autoHeight,
+          maxHeight ?? 600
+        )}}</style><head></head><body><script src="${gist}"></script></body></html>`}
         onLoad={handler}
       ></iframe>
     </div>
