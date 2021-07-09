@@ -1,7 +1,7 @@
 {
   "name": "kcblog",
   "display": "KCBlog",
-  "version": "0.3.4",
+  "version": "0.4.0",
   "description": "Personal blogs for collect and share purpose",
   "private": true,
   "repository": {

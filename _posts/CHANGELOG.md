@@ -1,4 +1,28 @@
 
+<a name="v0.4.0"></a>
+## [v0.4.0](https://github.com/kamontat/blog/compare/v0.3.4...v0.4.0) (2021-07-10)
+
+### Features
+
+* **post:** rewrote post `en/3`
+* **ui:** add edit button on post page
+
+### Improvement
+
+* **core:** simplified repo url to single place
+* **post:** remove unused image and fix image link
+* **ui:** gist is more responsive
+* **ui:** add edit button on top of page as well
+* **ui:** reduce margin on table on content
+
+### Pull Requests
+
+* Merge pull request [#5](https://github.com/kamontat/blog/issues/5) from kamontat/dependabot/npm_and_yarn/types/react-17.0.14
+* Merge pull request [#4](https://github.com/kamontat/blog/issues/4) from kamontat/dependabot/npm_and_yarn/types/node-16.3.0
+* Merge pull request [#2](https://github.com/kamontat/blog/issues/2) from barisengez/main
+* Merge pull request [#3](https://github.com/kamontat/blog/issues/3) from kamontat/dependabot/npm_and_yarn/types/react-dom-17.0.9
+
+
 <a name="v0.3.4"></a>
 ## [v0.3.4](https://github.com/kamontat/blog/compare/v0.3.3...v0.3.4) (2021-07-05)
 
