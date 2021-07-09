@@ -11,7 +11,7 @@ export const Footer = () => {
       </span>
       <span className="block text-small text-right">
         Current version is `<Link href="/changelog" name={`v${pjson.version}`} underline="always" window={true} />` (
-        <Link href="https://github.com/kamontat/blog" name={`source`} underline="always" window={true} />)
+        <Link href={pjson.repository.url} name={`source`} underline="always" window={true} />)
       </span>
     </footer>
   )
