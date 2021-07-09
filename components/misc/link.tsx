@@ -9,7 +9,7 @@ interface Props extends LinkProps {
 
 const Link = (props: Props) => {
   var sname = props.name ?? props.as ?? props.href
-  const classnames: Argument[] = ["hover:text-primary", "transition-colors", "duration-200"]
+  const classnames: Argument[] = ["font-mono", "hover:text-primary", "transition-colors", "duration-200"]
   props.underline === "hover" && classnames.push("hover:underline")
   props.underline === "always" && classnames.push("underline")
 

@@ -6,6 +6,8 @@ import { Metadata, SerizalizeMetadata } from "./metadata"
 import { mdToHtml } from "../markdown"
 import { calculateReadTime } from "./readtime"
 
+import pjson from "../../package.json"
+
 export interface SerizalizePost {
   id: number
   lang?: string
@@ -57,5 +59,13 @@ export class Post {
     }
 
     return base
+  }
+
+  /**
+   * return link for post
+   * @returns link to github website
+   */
+  github(): string {
+    return `${pjson.repository.url}/tree/main/_posts/${this.slug.toFilename()}`
   }
 }
