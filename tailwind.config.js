@@ -34,6 +34,23 @@ module.exports = {
                 color: theme("colors.primary"),
               },
             },
+            li: {
+              p: {
+                "margin-top": "0px !important",
+                "margin-bottom": "0px !important",
+              },
+            },
+          },
+        },
+        xl: {
+          css: {
+            maxWidth: "100%",
+            li: {
+              p: {
+                "margin-top": "0px !important",
+                "margin-bottom": "0px !important",
+              },
+            },
           },
         },
       }),
