@@ -45,7 +45,7 @@ const PostPage = ({ post, previous, next }: Props) => {
     >
       <Header />
       <article className="mb-8">
-        <PostHeader metadata={p.metadata} draft={p.slug.isDraft} readtime={p.readTimePerSecond} />
+        <PostHeader metadata={p.metadata} github={p.github()} draft={p.slug.isDraft} readtime={p.readTimePerSecond} />
         <Body>{p.process()}</Body>
       </article>
       <Footer tags={p.metadata.tags} github={p.github()} previous={previous} next={next} />
