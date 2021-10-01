@@ -42,7 +42,7 @@
   "devDependencies": {
     "@types/debug": "4.1.6",
     "@types/node": "16.3.0",
-    "@types/react": "17.0.14",
+    "@types/react": "17.0.26",
     "@types/react-dom": "17.0.9",
     "autoprefixer": "10.2.6",
     "eslint": "7.30.0",
